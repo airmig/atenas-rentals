@@ -8,13 +8,17 @@ set -uo pipefail
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$REPO_DIR"
 
+# launchd/cron run with a minimal PATH that won't include user-local install
+# dirs, so add the known Claude Code CLI location explicitly as a fallback.
+export PATH="$HOME/.local/bin:$PATH"
+
 mkdir -p logs
 LOG_FILE="logs/update-$(date -u +%Y%m%d).log"
 
 echo "=== Run started: $(date -u +'%Y-%m-%dT%H:%M:%SZ') ===" >> "$LOG_FILE"
 
 if ! command -v claude >/dev/null 2>&1; then
-  echo "ERROR: 'claude' CLI not found on PATH. Install Claude Code (https://claude.com/claude-code) and make sure it's on PATH for this shell (launchd/cron use a minimal PATH — see README)." | tee -a "$LOG_FILE"
+  echo "ERROR: 'claude' CLI not found on PATH (checked \$HOME/.local/bin too). Install Claude Code (https://claude.com/claude-code) or update the PATH line in this script to match its actual location (run 'which claude' in Terminal)." | tee -a "$LOG_FILE"
   exit 1
 fi
 

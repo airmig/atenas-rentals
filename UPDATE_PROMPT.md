@@ -26,6 +26,7 @@ From the results, fetch listing pages from legitimate real-estate sites (example
 - Never copy long descriptions verbatim — summarize in your own words if needed, but the schema below only needs short structured fields anyway.
 - Always keep the original listing URL so the site can link back to the source.
 - Only include long-term rentals (not vacation/nightly rentals like Airbnb/Vrbo-style listings) unless nothing else is available — this is a rental-housing tracker, not a vacation-booking site.
+- **Dedupe across sources:** the same physical property is often syndicated to multiple sites (e.g. RE/MAX Costa Rica and its local Atenas affiliate RE/MAX Best Climate frequently list the identical property). Before adding a listing found this run, check if one with the same price + bedrooms + bathrooms + closely matching title/location was already added this run from a different source; if so, keep only the first one found and skip the duplicate rather than showing the same property twice.
 
 ## 3. Normalize each listing to this schema
 

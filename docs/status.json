@@ -1,7 +1,10 @@
 {
-  "last_updated": "2026-07-10T21:10:19.624863+00:00",
-  "total_listings": 0,
-  "new_since_last_update": 0,
+  "last_updated": "2026-07-10T21:34:37.356179+00:00",
+  "total_listings": 15,
+  "new_since_last_update": 15,
   "removed_since_last_update": 0,
-  "by_source": {}
+  "by_source": {
+    "RE/MAX Costa Rica": 3,
+    "RE/MAX Best Climate": 12
+  }
 }
