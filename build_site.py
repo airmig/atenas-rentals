@@ -6,6 +6,7 @@ and docs/style.css. Run after data/listings.json has been updated for
 the current cycle (see UPDATE_PROMPT.md for the full run sequence).
 """
 import argparse
+import hashlib
 import html
 import json
 import sys
@@ -330,7 +331,14 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--new", type=int, default=0, dest="new_count")
     parser.add_argument("--removed", type=int, default=0, dest="removed_count")
+    parser.add_argument("--gen-id", nargs=2, metavar=("SOURCE", "URL"),
+                         help="Print the stable listing id (sha1 of source+url) and exit.")
     args = parser.parse_args()
+
+    if args.gen_id:
+        source, url = args.gen_id
+        print(hashlib.sha1((source + url).encode("utf-8")).hexdigest()[:16])
+        return 0
 
     listings = load_listings()
     html_out, status = render_site(listings, args.new_count, args.removed_count)
